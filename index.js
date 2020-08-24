@@ -3,32 +3,43 @@ const { Sequelize, DataTypes } = require('sequelize')
 const Task = require('./models/task')
 
 const app = express()
-const sequelize = new Sequelize('postgres://postgres:example@db:5432/toti')
+const sequelize = new Sequelize('postgres://postgres:example@db:5432/task-list')
 const tasks = Task(sequelize, DataTypes)
+
+// We need to parse JSON coming from requests
+app.use(express.json())
 
 // List tasks
 app.get('/tasks', (req, res) => {
-  res.send('TODO')
+  res.json({ action: 'Listing tasks' })
 })
 
 // Create task
 app.post('/tasks', (req, res) => {
-  res.send('TODO')
+  const body = req.body
+
+  res.json(body)
 })
 
 // Show task
 app.get('/tasks/:id', (req, res) => {
-  res.send('TODO')
+  const taskId = req.params.id
+
+  res.send({ action: 'Showing task', taskId: taskId })
 })
 
 // Update task
 app.put('/tasks/:id', (req, res) => {
-  res.send('TODO')
+  const taskId = req.params.id
+
+  res.send({ action: 'Updating task', taskId: taskId })
 })
 
 // Delete task
 app.delete('/tasks/:id', (req, res) => {
-  res.send('TODO')
+  const taskId = req.params.id
+
+  res.send({ action: 'Deleting task', taskId: taskId })
 })
 
 app.listen(3000, () => {
