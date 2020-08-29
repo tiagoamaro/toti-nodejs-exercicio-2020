@@ -1,10 +1,8 @@
 {
   "development": {
-    "username": "postgres",
-    "password": "example",
     "database": "task-list",
-    "host": "db",
-    "dialect": "postgres"
+    "storage": "task-list.db",
+    "dialect": "sqlite"
   },
   "test": {
     "username": "root",

@@ -3,7 +3,7 @@ const { Sequelize, DataTypes } = require('sequelize')
 const Task = require('./models/task')
 
 const app = express()
-const sequelize = new Sequelize('postgres://postgres:example@db:5432/task-list')
+const sequelize = new Sequelize({ dialect: 'sqlite', storage: './task-list.db' })
 const tasks = Task(sequelize, DataTypes)
 
 // We need to parse JSON coming from requests
