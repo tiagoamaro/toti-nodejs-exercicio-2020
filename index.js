@@ -37,18 +37,28 @@ app.put('/tasks/:id', async (req, res) => {
   const taskId = req.params.id
   const body = req.body
   const task = await tasks.findByPk(taskId)
-  await task.update({ ...body })
 
-  res.send({ task })
+  if (task) {
+    await task.update({ ...body })
+    res.send({ task })
+  } else {
+    res.status(404)
+    res.send({ message: 'Task not found' })
+  }
 })
 
 // Delete task
 app.delete('/tasks/:id', async (req, res) => {
   const taskId = req.params.id
   const task = await tasks.findByPk(taskId)
-  await task.destroy()
 
-  res.send({ task })
+  if (task) {
+    await task.destroy()
+    res.send({ task })
+  } else {
+    res.status(404)
+    res.send({ message: 'Task not found' })
+  }
 })
 
 app.listen(3000, () => {
