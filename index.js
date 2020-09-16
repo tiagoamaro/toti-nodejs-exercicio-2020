@@ -10,36 +10,45 @@ const tasks = Task(sequelize, DataTypes)
 app.use(express.json())
 
 // List tasks
-app.get('/tasks', (req, res) => {
-  res.json({ action: 'Listing tasks' })
+app.get('/tasks', async (req, res) => {
+  const taskList = await tasks.findAll()
+
+  res.json({ tasks: taskList })
 })
 
 // Create task
-app.post('/tasks', (req, res) => {
+app.post('/tasks', async (req, res) => {
   const body = req.body
+  const task = await tasks.create(body)
 
-  res.json(body)
+  res.json({ task })
 })
 
 // Show task
-app.get('/tasks/:id', (req, res) => {
+app.get('/tasks/:id', async (req, res) => {
   const taskId = req.params.id
+  const task = await tasks.findByPk(taskId)
 
-  res.send({ action: 'Showing task', taskId: taskId })
+  res.send({ task })
 })
 
 // Update task
-app.put('/tasks/:id', (req, res) => {
+app.put('/tasks/:id', async (req, res) => {
   const taskId = req.params.id
+  const body = req.body
+  const task = await tasks.findByPk(taskId)
+  await task.update({ ...body })
 
-  res.send({ action: 'Updating task', taskId: taskId })
+  res.send({ task })
 })
 
 // Delete task
-app.delete('/tasks/:id', (req, res) => {
+app.delete('/tasks/:id', async (req, res) => {
   const taskId = req.params.id
+  const task = await tasks.findByPk(taskId)
+  await task.destroy()
 
-  res.send({ action: 'Deleting task', taskId: taskId })
+  res.send({ task })
 })
 
 app.listen(3000, () => {
