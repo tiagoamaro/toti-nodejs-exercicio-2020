@@ -11,3 +11,4 @@ O servidor express e Sqlite3 são executados utilizando o NodeJS instalados no s
 
 - Rodando as migrações de banco de dados: `npx sequelize-cli db:migrate`
 - Criando registros com seeds: `npx sequelize-cli db:seed:all`
+# projeto-node-19-08
