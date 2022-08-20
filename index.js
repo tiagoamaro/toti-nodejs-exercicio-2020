@@ -44,4 +44,3 @@ app.delete('/tasks/:id', (req, res) => {
 
 app.listen(3000, () => {
   console.log('Iniciando o ExpressJS na porta 3000')
-})

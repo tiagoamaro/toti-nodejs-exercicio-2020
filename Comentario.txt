@@ -1,0 +1,7 @@
+------ projeto-node-------
+1 - npm init
+2 - npm i express
+3 - npm i nodemon
+4 – Mudanças do  arquivo index.js
+---------comentario----------
+Ainda nâo pode executar as demais partes do código 
